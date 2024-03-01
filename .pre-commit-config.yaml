@@ -1,0 +1,20 @@
+repos:
+
+# from pre-commit.com/hooks.html (standard hook actions)
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+    -   id: check-added-large-files
+
+# to format jupyter nbs
+-   repo: https://github.com/psf/black
+    rev: 22.10.0
+    hooks:
+    -   id: black-jupyter
+    
+# nbstripout: to remove cell output
+- repo: https://github.com/kynan/nbstripout
+  rev: 0.7.1
+  hooks:
+    - id: nbstripout
+      stages: [commit]

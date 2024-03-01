@@ -1,0 +1,27 @@
+name: pre-commit
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v3
+    - uses: pre-commit/action@v3.0.1
+    
+    - name: Install nbstripout
+      run: |
+        pip install nbstripout
+        
+    - name: Run pre-commit script
+      run: |
+        find . -name *.ipynb -exec nbstripout {} +
+
+    - name: Create new git commit with modified files
+      run: |
+        git add .
+        # git commit -m "Strip notebook outputs"
